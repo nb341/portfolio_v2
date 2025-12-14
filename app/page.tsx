@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
+
 import * as THREE from 'three';
 
 // ==========================================
@@ -916,7 +917,7 @@ const Footer: React.FC = () => (
 // --- MAIN APP COMPONENT ---
 
 export default function App() {
-  const [threeLoaded, setThreeLoaded] = useState<boolean>(false);
+  // Removed threeLoaded state as THREE is imported directly
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<AppData>({
       skills: {},
@@ -926,17 +927,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    // 1. Load Three.js
-    const checkThree = () => {
-      if (typeof window !== 'undefined' && (window as any).THREE) {
-        setThreeLoaded(true);
-      } else {
-        setTimeout(checkThree, 100);
-      }
-    };
-    checkThree();
-
-    // 2. Fetch CMS Data (Mock)
+    // 1. Fetch CMS Data (Mock)
     mockFetchData().then((fetchedData) => {
         setData(fetchedData);
         setLoading(false);
@@ -945,27 +936,18 @@ export default function App() {
 
   return (
     <div className="bg-neutral-950 min-h-screen text-gray-200 font-sans selection:bg-purple-500 selection:text-white">
-       {!threeLoaded && (
-        <div className="fixed inset-0 flex items-center justify-center bg-neutral-950 z-[1000]" role="alert" aria-busy="true">
-           <div className="text-purple-500 animate-pulse text-xl">Loading 3D Engine...</div>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" onLoad={() => setThreeLoaded(true)}></script>
-        </div>
-      )}
-
-      {threeLoaded && (
-        <>
-          <Navigation />
-          <main>
-            <HeroSection />
-            <SkillsSection skills={data.skills} loading={loading} />
-            <ProjectsSection projects={data.projects} loading={loading} />
-            <CertificatesSection certificates={data.certificates} loading={loading} />
-            <GameSection />
-            <BlogSection blogPosts={data.blogPosts} loading={loading} />
-          </main>
-          <Footer />
-        </>
-      )}
+      {/* 3D Engine loading screen is no longer needed as THREE is bundled */}
+      
+      <Navigation />
+      <main>
+        <HeroSection />
+        <SkillsSection skills={data.skills} loading={loading} />
+        <ProjectsSection projects={data.projects} loading={loading} />
+        <CertificatesSection certificates={data.certificates} loading={loading} />
+        <GameSection />
+        <BlogSection blogPosts={data.blogPosts} loading={loading} />
+      </main>
+      <Footer />
     </div>
   );
 }
