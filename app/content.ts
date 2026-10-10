@@ -1,7 +1,7 @@
 export const profile = {
   name: "Narin Balkissoon", resumeName: "Narindra Balkissoon", location: "Vermillion, SD",
   github: "https://github.com/nb341", linkedin: "https://linkedin.com/in/narindra-balkissoon",
-  summary: "Software engineer with over 4 years building and running production systems in banking, a HIPAA-regulated startup, and manufacturing. Experience across C#, .NET, TypeScript, React, Angular, SQL Server, and PostgreSQL. Cut deployment time 97%, reduced production container images 34%, and presented architecture evaluations to a CTO. M.Sc. in Computer Science with an AI focus.",
+  summary: "Product Engineer connecting product decisions, user experience, and system design, with over 4 years building and running production systems in banking, a HIPAA-regulated startup, and manufacturing. Extensive application and cloud security experience, including identity and access controls, TLS automation, secrets management, and sensitive-data protection. Experience across C#, .NET, TypeScript, React, Angular, SQL Server, and PostgreSQL. Cut deployment time 97%, reduced production container images 34%, and presented architecture evaluations to a CTO. M.Sc. in Computer Science with an AI focus; B.A.Sc. in Computer Engineering specializing in Network and Telecommunications Engineering.",
 };
 export const metrics = [
   { value: "97", unit: "%", label: "Faster build & deployment", context: "15 minutes to under 30 seconds · CIBC" },
@@ -10,9 +10,27 @@ export const metrics = [
 ];
 export interface CaseStudy {
   id: string; company: string; category: string; title: string; summary: string;
+  attribution?: string;
   result: string; tags: string[]; diagram: [string, string, string]; details: { label: string; text: string }[];
 }
 export const projects: CaseStudy[] = [
+  {
+    id: "m3-id", company: "M3-ID · University of South Dakota", category: "AI solutions / Multimodal search",
+    title: "Find the video. Even when you only remember part of it.",
+    summary: "An AI-powered video identification solution that combines text, image, and audio clues to retrieve relevant clips. Designed around incomplete user inputs, interactive response times, and independently deployable services.",
+    result: "7 input combinations evaluated · 108.3 ms p95 full-pipeline latency in the reported benchmark",
+    tags: ["Python", "FastAPI", "gRPC", "Qdrant", "CLIP", "Whisper", "Docker"],
+    diagram: ["User clues", "AI retrieval", "Ranked clips"],
+    attribution: "Collaborative university AI project, coauthored with Dan Hanson and Dalton Hohn-Hill. Architecture and benchmark results describe the team’s solution; they are not a claim of production deployment.",
+    details: [
+      { label: "The user problem", text: "Someone remembers a line of dialogue, a scene, or a sound, but not the video’s title. M3-ID accepts text with optional image or audio inputs and returns ranked clips, so identification does not depend on having every kind of clue." },
+      { label: "The AI solution", text: "The team combined CLIP visual features, Whisper speech transcription, Audio Spectrogram Transformer acoustic features, and Sentence-BERT text embeddings. Hybrid search blends semantic similarity with TF-IDF keyword matching, supporting both paraphrased descriptions and exact dialogue or names." },
+      { label: "System design", text: "A FastAPI service orchestrates requests, a separate Python gRPC service extracts features, and Qdrant stores and searches dense and sparse vectors. Docker Compose connects the services. Separating inference from retrieval supports isolated testing and independent updates; late fusion and zero-padding accommodate missing inputs without joint model training." },
+      { label: "Product tradeoffs", text: "For interactive search, response time matters alongside relevance. The reported MSR-VTT benchmark measured 101.5 ms average and 108.3 ms p95 latency for the full configuration across 500 queries. Feature extraction dominated latency, highlighting where optimization would have the greatest impact." },
+      { label: "What evaluation showed", text: "The study compared all seven combinations of text, image, and audio. On the MSR-VTT text-and-image configuration, hybrid retrieval achieved 0.499 MRR versus 0.461 for dense-only retrieval. Adding modalities did not always improve ranking: weaker signals could dilute stronger ones, motivating adaptive weighting rather than assuming more inputs are always better." },
+      { label: "Limits & next steps", text: "Audio queries reused the indexed audio track, so the high audio-only score is not evidence of performance on independent audio samples. Dataset availability and single-frame visual sampling also limited evaluation. Next steps include separate audio segments, adaptive modality weighting, and concurrent-load testing before making production-scale claims." },
+    ],
+  },
   { id: "master-data", company: "CIBC Caribbean", category: "Full-stack / Data integrity", title: "Modern interfaces. Legacy systems. One reliable workflow.", summary: "React interfaces and .NET REST APIs connecting banking workflows to legacy IBM MDM SOAP services.", result: "Delivered the bank’s first synchronous master-data updates", tags: ["React", ".NET", "REST / SOAP", "SQL Server"], diagram: ["React UI", ".NET API", "IBM MDM"], details: [
     { label: "The problem", text: "Banking applications needed reliable master-data updates while continuing to use legacy IBM MDM SOAP services." },
     { label: "My contribution", text: "Built React front ends from Figma prototypes in a six-person team and delivered two .NET REST APIs with Entity Framework over IBM MDM SOAP services. Took on full-stack development when the lead developer was reassigned." },
@@ -108,8 +126,8 @@ export const engineeringStories = [
 ];
 
 export const developmentWorkflow = [
-  { title: "Understand the change", description: "Work through the problem, users, constraints, and acceptance criteria. Use an agent to challenge unclear requirements before coding." },
-  { title: "Plan the interfaces", description: "Review the architecture and define API contracts, database changes, and the frontend flow. Break the feature into changes that can be reviewed independently." },
+  { title: "Understand the change", description: "Start with the user?s problem and the outcome the feature should support. Work through product requirements, constraints, and acceptance criteria; use AI to challenge assumptions before coding." },
+  { title: "Plan the interfaces", description: "Design the user flow and system together: clear UI feedback, accessible interactions, API contracts, and database changes. Work through security and operational tradeoffs, then break the feature into reviewable changes." },
   { title: "Describe what should happen", description: "Use Gherkin acceptance criteria and a mix of BDD and TDD. Review the proposed tests before treating them as evidence that the feature works." },
   { title: "Build in small pieces", description: "Use Claude Code and Codex for focused implementation work, with role-specific agents where useful. Keep the code matched to the reviewed plan." },
   { title: "Challenge the result", description: "Inspect the diff, run the checks, and ask an agent to question the implementation. Revisit the docs when I cannot explain a choice confidently." },
@@ -194,12 +212,13 @@ export const independentWork = {
   highlights: ["Built and repaired PCs and phones.", "Apple experience is software support only."],
 };
 export const capabilities = [
-  { title: "Interfaces & accessibility", description: "Usable applications, clear data visualizations, and accessibility informed by hands-on evaluation.", skills: ["React", "TypeScript", "Next.js", "Angular", "D3.js", "WCAG 2.1"] },
+  { title: "Application & cloud security", description: "Extensive experience securing applications and cloud infrastructure in banking and HIPAA-regulated environments, from access controls to protecting sensitive telemetry.", skills: ["Entra ID", "MSAL", "SSO / RBAC", "SSL / TLS", "Azure Key Vault", "Secrets management", "PHI redaction", "Read-only database roles"] },
+  { title: "Interfaces & accessibility", description: "User flows, clear feedback, and usable interfaces guided by UI/UX principles and hands-on accessibility evaluation.", skills: ["React", "TypeScript", "Next.js", "Angular", "D3.js", "WCAG 2.1"] },
   { title: "APIs & data", description: "Application services and data workflows across modern APIs and existing enterprise systems.", skills: ["C# / .NET", "Entity Framework", "NestJS", "Python", "REST / SOAP", "PostgreSQL", "SQL Server", "TypeORM", "SSIS", "Pentaho", "IBM DB2", "T-SQL"] },
   { title: "Cloud & delivery", description: "Repeatable deployments, leaner containers, and infrastructure that supports the application.", skills: ["AWS", "ECS Fargate", "EC2", "RDS / RDS Proxy", "Azure", "Terraform CDKTN", "Docker", "GitHub Actions", "Azure DevOps", "NGINX"] },
   { title: "Reliability & verification", description: "Production visibility and deliberate testing, with an engineer accountable for AI-assisted changes.", skills: ["Grafana", "OpenTelemetry", "Prometheus", "xUnit", "Jest", "Cypress", "Claude Code", "Codex"] },
 ];
 export const education = [
   { title: "M.Sc. Computer Science · Artificial Intelligence", school: "University of South Dakota", dates: "Aug 2024 — Dec 2025", detail: "GPA 4.0 / 4.0" },
-  { title: "B.A.Sc. Computer Engineering", school: "University of Trinidad and Tobago", dates: "Sep 2017 — Jul 2020", detail: "Magna Cum Laude · GPA 3.55 / 4.0" },
+  { title: "B.A.Sc. Computer Engineering", school: "University of Trinidad and Tobago", dates: "Sep 2017 — Jul 2020", detail: "Specialization in Network and Telecommunications Engineering · Magna Cum Laude · GPA 3.55 / 4.0" },
 ];

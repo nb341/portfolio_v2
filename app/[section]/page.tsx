@@ -5,12 +5,12 @@ import { PortfolioFrame } from "../components/portfolio-frame";
 import { AboutSection, ApproachSection, CapabilitiesSection, ContactSection, ExperienceSection, WorkSection } from "../components/portfolio-sections";
 
 const sections = {
-  about: { title: "About me", description: "Meet Narin: a software engineer who loves building, learning, figuring things out, and using AI to test ideas.", Component: AboutSection },
+  about: { title: "About me", description: "Meet Narin: a Product Engineer who loves building, learning, figuring things out, and using AI to test ideas.", Component: AboutSection },
   work: { title: "Selected work", description: "Production case studies in full-stack engineering, cloud delivery, and observability.", Component: WorkSection },
   experience: { title: "Experience", description: "Full-stack, DevOps, data engineering, accessibility, volunteering, and independent repair experience.", Component: ExperienceSection },
   capabilities: { title: "Capabilities", description: "Technical capabilities across interfaces, APIs, data, cloud delivery, reliability, and accessibility.", Component: CapabilitiesSection },
   approach: { title: "How I work", description: "Requirements, AI-assisted engineering, verification, mentoring, and remote collaboration.", Component: ApproachSection },
-  contact: { title: "Contact", description: "Get in touch with Narin Balkissoon about senior full-stack roles and engineering opportunities.", Component: ContactSection },
+  contact: { title: "Contact", description: "Get in touch with Narin Balkissoon about senior product and full-stack engineering opportunities.", Component: ContactSection },
 };
 type Section = keyof typeof sections;
 type Props = { params: Promise<{ section: string }> };

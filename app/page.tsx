@@ -9,10 +9,10 @@ export default function Home() {
   return <PortfolioFrame>
     <section className="hero shell" id="home" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="eyebrow"><span className="status-dot" /> Seeking senior full-stack opportunities</p>
-        <p className="hero-name">Hi, I’m {profile.name}. <span>/ Full-stack engineer</span></p>
+        <p className="eyebrow"><span className="status-dot" /> Seeking senior product & full-stack engineering opportunities</p>
+        <p className="hero-name">Hi, I’m {profile.name}. <span>/ Product Engineer</span></p>
         <h1 id="hero-title">I build things.<br /><span className="gradient-text">I ask questions.</span><br />I keep learning.</h1>
-        <p className="hero-description">Building is how I learn. I like taking a problem apart, trying an idea, and seeing it work in the real world. These days, that means full-stack engineering, a bit of cloud work, and using AI to ask better questions and test theories.</p>
+        <p className="hero-description">Building is how I learn. As a Product Engineer, I think through what a feature should do, how someone will use it, and the interface and system behind it. I bring full-stack, cloud, and security experience, and use AI to explore ideas and test theories along the way.</p>
         <p className="hero-proof">Over four years in production engineering · M.Sc. Computer Science (AI)</p>
         <div className="actions">
           <Link className="button primary" href="/work">Explore my work <span aria-hidden="true">↗</span></Link>
