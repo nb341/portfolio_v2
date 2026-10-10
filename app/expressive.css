@@ -66,7 +66,7 @@ body { background: radial-gradient(ellipse at 90% 5%, #792cab26, transparent 38%
 .experience-row .eyebrow { color: #e6b4f4; }
 .timeline-index { display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: #472858; border: 1px solid #9765b5; border-radius: 50%; color: #f1caff; }
 .independent-work, .capability { background: #24182f; border-color: #624477; }
-.capability-grid { border-color: #76528d; }
+.capability-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-color: #76528d; }
 .capability-icon { color: #efb6ff; }
 .approach-grid article { border-top: 3px solid #d783dc; }
 .workflow-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 40px; margin-top: 45px; border: 1px solid #805694; border-radius: 12px; padding: 35px; background: linear-gradient(130deg, #341b48, #1c1428 85%); }

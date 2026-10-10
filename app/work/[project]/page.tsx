@@ -27,7 +27,7 @@ export default async function CaseStudyPage({ params }: Props) {
         <ul className="tags" aria-label="Technologies">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
       </header>
       {project.details.map(detail => <section className="case-details" key={detail.label}><h2>{detail.label}</h2><p>{detail.text}</p></section>)}
-      <footer className="case-end"><p>Employer work. Internal source code and systems are private. Descriptions reflect my contributions and the results delivered with my teams.</p><div className="actions"><Link className="button secondary" href="/work">All case studies ↗</Link><Link className="button primary" href="/contact">Talk about your project ↗</Link></div></footer>
+      <footer className="case-end"><p>{project.attribution ?? "Employer work. Internal source code and systems are private. Descriptions reflect my contributions and the results delivered with my teams."}</p><div className="actions"><Link className="button secondary" href="/work">All case studies ↗</Link><Link className="button primary" href="/contact">Talk about your project ↗</Link></div></footer>
     </article>
   </PortfolioFrame>;
 }

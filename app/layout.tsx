@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Narin Balkissoon | Full-Stack Engineer",
-  description: "Full-stack engineer with cloud and platform depth. Explore production work in React, .NET, AWS, observability, and accessible interfaces.",
-  openGraph: { title: "Narin Balkissoon | Full-Stack Engineer", description: "A software engineer who loves figuring things out, building useful tools, and learning along the way.", type: "website" },
+  title: "Narin Balkissoon | Product Engineer",
+  description: "Product Engineer connecting user needs, UI/UX, and system design with full-stack, cloud, and security experience.",
+  openGraph: { title: "Narin Balkissoon | Product Engineer", description: "Thinking through the product, the user experience, and the systems that make useful features work.", type: "website" },
 };
 
 export default function RootLayout({
